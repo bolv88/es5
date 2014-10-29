@@ -3,10 +3,11 @@
 
 server_host_port() ->
   ["blublu.me", 2345].
+  %["106.187.49.213", 2345].
 
 start_sock5_client()->
   [_ServerHost, ServerPort] = server_host_port(),
-  {ok, Listen} = gen_tcp:listen(ServerPort, [binary, {packet, 0}, {reuseaddr, true}, {active, true}]),
+  {ok, Listen} = gen_tcp:listen(ServerPort, [binary, {packet, 0}, {reuseaddr, true}, {active, true}, {backlog, 128}]),
   client_loop_listen(Listen).
 
 client_loop_listen(Listen) ->
@@ -64,7 +65,7 @@ client_loop(SocketBrowser, SocketServer) ->
   
 start_sock5_server()->
   [_ServerHost, ServerPort] = server_host_port(),
-  {ok, Listen} = gen_tcp:listen(ServerPort, [binary, {packet, 0}, {reuseaddr, true}, {active, true}]),
+  {ok, Listen} = gen_tcp:listen(ServerPort, [binary, {packet, 0}, {reuseaddr, true}, {active, true}, {backlog, 128}]),
   loop_listen(Listen).
   %{ok, Socket} = gen_tcp:accept(Listen),
   %gen_tcp:close(Listen),
