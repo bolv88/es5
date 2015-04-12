@@ -1,0 +1,1 @@
+-record(server_conf, {host, port}).
