@@ -5,7 +5,7 @@
 
 start(_Type, _Args) ->
   %Opts = [],
-  ListenPort = 2345, %=tochange, change to env config file
+  ListenPort = 6001, %=tochange, change to env config file
   {ok, LSock} = gen_tcp:listen(ListenPort, [binary, {packet, 0}, {reuseaddr, true}, {active, true}, {backlog, 128}]),
   case s5_server_sup:start_link(LSock) of
     {ok, Pid} ->

@@ -9,6 +9,7 @@ start_link(LSock) ->
   supervisor:start_link({local, ?SERVER}, ?MODULE, [LSock]).
 
 start_child() ->
+  yb_common:print_info("in start child ", []),
   supervisor:start_child(?SERVER, []).
 
 init([LSock]) ->

@@ -38,12 +38,11 @@ bin_decode(<<H:8/integer, T/binary>>, L) ->
 
 %
 print(_Format, _L) ->
-  io:format(_Format, _L),
-  1.
+  io:format(_Format, _L).
 
 %qing green color
 print_info(Format, L) ->
-  io:format("\e[1;36m" ++ Format ++ "\e[0m~n", L).
+  io:format("[~p]\e[1;36m" ++ Format ++ "\e[0m~n", [self()|L]).
 
 %red color
 print_error(Format, L) ->
