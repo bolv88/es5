@@ -12,8 +12,10 @@ start_child() ->
   supervisor:start_child(?SERVER, []).
 
 init([LSock, ServerConf]) ->
+  %Server = {s5_client_handler, {s5_client_handler, start_link, [LSock, ServerConf]},
+    %Setemporary, brutal_kill, worker, [s5_client_handler]},
   Server = {s5_client_handler, {s5_client_handler, start_link, [LSock, ServerConf]},
-    temporary, brutal_kill, worker, [s5_client_handler]},
+    temporary, infinity, worker, [s5_client_handler]},
   Children = [Server],
   RestartStrategy = {simple_one_for_one, 0, 1},
   {ok, {RestartStrategy, Children}}.
